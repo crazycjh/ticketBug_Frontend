@@ -4,23 +4,6 @@ import './assets/main.css'
 import { createApp } from "vue";
 import { createPinia } from 'pinia'
 
-import "./style.css";
-import 'primeicons/primeicons.css'
-
-
-
-
-import Button from "primevue/button"
-import InputGroup from 'primevue/inputgroup';
-import InputGroupAddon from 'primevue/inputgroupaddon';
-import BadgeDirective from 'primevue/badgedirective';
-
-
-// import { usePassThrough } from "primevue/passthrough";
-// import Tailwind from "primevue/passthrough/tailwind";
-// import as component
-
-
 import App from "./App.vue";
 import router from './router'
 import primeVueImport from './primeVueImport.js'
@@ -30,6 +13,7 @@ const app = createApp(App)
 
 app.use(createPinia())
 app.use(router)
+
 primeVueImport(app);
 // app.use(PrimeVue, { unstyled: true });
 
