@@ -1,73 +1,43 @@
 <script setup>
 // import { ref } from 'vue';
-import { RouterView } from "vue-router";
+
+import searchArea from './components/SearchFunction.vue'
+import MenuBar from './components/home/header/MenuBar.vue'
+
+import { computed } from 'vue';
+import { RouterView, routeLocationKey, useRoute } from "vue-router";
+
+
+const route = useRoute();
+
+const ishomePage = computed(() => {
+  switch (route.path) {
+    case '/flighhome' :
+      return true;
+    case '/ticketlist':
+      return false;
+    default :
+      return true;
+  }
+})
+
 </script>
 
 <template>
-	<RouterView />
+  <div class="bg-sky-600 pb-14 drop-shadow-md">
+    <header class="mx-auto max-w-7xl bg-sky-600">
+      <nav>
+        <MenuBar/>
+      </nav>
+      <div class="">
+        <h2 v-show="ishomePage" class="mt-16  text-5xl text-center text-slate-800 font-bold">一鍵搜尋，爬出所有便宜機票。</h2>
+      </div>
+      <searchArea/>
+    </header>
+  </div>
+  <RouterView />
 </template>
 
 <style scoped>
 
-header {
-  line-height: 1.5;
-  max-height: 100vh;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-nav {
-  width: 100%;
-  font-size: 12px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-nav a.router-link-exact-active {
-  color: var(--color-text);
-}
-
-nav a.router-link-exact-active:hover {
-  background-color: transparent;
-}
-
-nav a {
-  display: inline-block;
-  padding: 0 1rem;
-  border-left: 1px solid var(--color-border);
-}
-
-nav a:first-of-type {
-  border: 0;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  nav {
-    text-align: left;
-    margin-left: -1rem;
-    font-size: 1rem;
-
-    padding: 1rem 0;
-    margin-top: 1rem;
-  }
-}
 </style>
