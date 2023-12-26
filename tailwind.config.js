@@ -33,7 +33,8 @@ module.exports = {
             "surface-950": "rgb(var(--surface-950))",
         },
         spacing: {
-          '100px': '100px'
+          '100px': '100px',
+          '33': '8.25rem'
         }
     },
 },
