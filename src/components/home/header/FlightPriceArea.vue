@@ -1,25 +1,48 @@
 <template>
-<div class="flex  flex-wrap mt-20 gap-3 justify-center">
-    <Card v-for="item in airportPrice" :key="item.airport" class=" w-1/4 cursor-pointer" @click="test(item.airport)">
-    <template #title>{{ item.title }} {{ item.airport}} </template>
-    <template #content>
-        <div class="w-full relative h-20 overflow-hidden">
-            <img :src="item.img" alt="" class=" object-cover overflow-hidden">
-        </div>
-        <p class="pt-4 -mb-3">
-            {{ item.currency }} {{ item.price }} 起
-        </p>
-        <button>
-            
-        </button>
-    </template>
-</Card>
+<div class="mt-20">
+    <div class="flex justify-center mb-14">
+        <h3 class="text-3xl text-center text-slate-600 font-bold">{{ from }}</h3>
+    </div>
+    <div class="flex  flex-wrap  gap-3 justify-center">
+        <Card v-for="item in cheapestTicket.data" :key="item.airport" class="w-1/4 cursor-pointer" @click="test(item.airport)">
+            <template #title>{{ item.title }} {{ item.airport}} </template>
+            <template #content>
+                <div class="w-full relative overflow-hidden aspect-ratio-4/3">
+                    <img :src="item.img" alt="" class=" object-cover overflow-hidden absolute inset-0 transition duration-700 hover:scale-110">
+                </div>
+                <p class="pt-4 -mb-3">
+                    {{ item.currency }} {{ item.price }} 起
+                </p>
+                <button>
+                </button>
+            </template>
+        </Card>
+    </div>
+
 </div>
 </template>
 <script setup>
-  import { ref } from "vue";
-  import { useRouter } from "vue-router";
+    import { ref, onMounted, defineProps } from "vue";
+    import { useRouter } from "vue-router";
+    import axios from "axios"
 
+    const props = defineProps(['from']);
+    const cheapestTicket = ref([]);
+
+    onMounted(async()=> {
+        const fetchData = async() => {
+            try{
+                const response = await axios.get("https://b42aaea4-c106-47c5-9c16-69874ccbc1e6.mock.pstmn.io/Cheapestticket")
+                return response.data;
+            }catch(error) {
+                console.error(error);
+            }
+        }
+
+        // const  = await fetchData();
+        cheapestTicket.value = await fetchData();
+        console.log(cheapestTicket.value.data);
+    })
   // 這是假資料 需要透過axios去取得出發地以及便宜的機場票價，以6個機場為上限(所以可以是TPE, HKG, BKK 出發)
   const airportPrice = [
     {
@@ -71,3 +94,11 @@ const test = (key) => {
     console.log('測試測試');
 }
 </script>
+<style>
+.aspect-ratio-4\/3::before {
+    content: '';
+    display: block;
+    padding-bottom: 75%; /* 高度是寬度的 75% */
+}
+
+</style>
