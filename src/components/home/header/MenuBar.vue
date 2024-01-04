@@ -1,6 +1,6 @@
 <template>
   <div class="card flex justify-between">
-    <div class="flex items-center ml-10 gap-3 mt-10">
+    <div class="flex items-center ml-10 gap-3 mt-10 cursor-pointer" @click="() => router.push('/flighhome')">
       <svg
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
@@ -92,10 +92,10 @@ const items = ref([
     ],
   },
   {
-    label: "Programmatic",
+    label: "便宜機票",
     icon: "pi pi-link",
     command: () => {
-      router.push("/setting");
+      router.push("/ticketlist");
     },
   },
   {
@@ -113,4 +113,5 @@ const items = ref([
     ],
   },
 ]);
+
 </script>
