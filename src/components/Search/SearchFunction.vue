@@ -1,5 +1,7 @@
 <script setup>
 import { ref, watch } from "vue";
+import { getAirportInfo }  from '../../utility/getAirportCode'
+
 const roundOpen =  ref("round")
 const airport_1 = ref("");
 const airport_2 = ref("");
@@ -30,6 +32,24 @@ const roundOpenSwitch = (change) => {
 		openBtnClass.value = {root: '!bg-sky-800 !text-gray-50'};
 	}
 };
+
+// 搜尋機場code
+const search = (event) => {
+    let query = event.query;
+	const info = getAirportInfo(query);
+	console.log(info);
+    // let newFilteredCities = [];
+
+    // for (let country of groupedCities.value) {
+    //     let filteredItems = FilterService.filter(country.items, ['label'], query, FilterMatchMode.CONTAINS);
+    //     if (filteredItems && filteredItems.length) {
+    //         newFilteredCities.push({...country, ...{items: filteredItems}});
+    //     }
+    // }
+
+    // filteredCities.value = newFilteredCities;
+
+}
 </script>
 
 <template>
@@ -58,7 +78,7 @@ const roundOpenSwitch = (change) => {
 				</div>
 				<div class="relative grow">
 					<div
-						class="w-10 h-10 bg-gray-100 absolute top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full border-spacing-3 border-l-yellow-300 flex justify-center items-center cursor-pointer"
+						class="w-10 h-10 bg-gray-100 absolute top-1/2 -translate-y-1/2 -translate-x-1/2 rounded-full border-spacing-3 border-l-yellow-300 flex justify-center items-center cursor-pointer z-10"
 						:class=" {'-rotate-90 left-1/2' : roundOpen==='open'} "
 					>
 						<svg
@@ -76,11 +96,22 @@ const roundOpenSwitch = (change) => {
 							/>
 						</svg>
 					</div>
-					<InputText
+					<!-- <InputText
 						v-model="airport_2"
 						placeholder="目的地"
 						:pt="{ root: 'w-full ' }"
 						class="h-16 pl-10 "
+					/> -->
+					<AutoComplete
+						v-model="airport_2"
+						:suggestions="items" 
+						@complete="search"
+						placeholder="目的地"
+						:pt="{
+							root:'w-full',
+							input: 'w-full pl-10'
+						}"
+						class="h-16 "
 					/>
 					<InputText
 						v-if="roundOpen==='open'"
