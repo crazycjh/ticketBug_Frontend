@@ -85,8 +85,8 @@ export default {
             'border-2',
 
             // Colors
-            'bg-surface-0 dark:bg-surface-600',
-            'border-primary-500 dark:border-primary-400',
+            'bg-primary-0 dark:bg-primary-600',
+            'border-primary-500 dark:border-primary-600',
 
             // States
             'hover:bg-primary-500 hover:border-primary-500',
@@ -118,8 +118,8 @@ export default {
             'border-2',
 
             // Colors
-            'bg-surface-0 dark:bg-surface-600',
-            'border-primary-500 dark:border-primary-400',
+            'bg-primary-0 dark:bg-primary-600',
+            'border-primary-500 dark:border-primary-600',
 
             // States
             'hover:bg-primary-500 hover:border-primary-500',

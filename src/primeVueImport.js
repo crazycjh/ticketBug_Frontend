@@ -6,6 +6,8 @@ import InputText from "primevue/InputText";
 import Menubar from 'primevue/menubar';
 import Card from 'primevue/card';
 import Skeleton from 'primevue/skeleton';
+import Slider from 'primevue/Slider'
+import AutoComplete from 'primevue/autocomplete';
 
 
 import InputGroup from 'primevue/inputgroup';
@@ -21,6 +23,8 @@ const setPrimeVue = (app) => {
     app.component('Menu-bar', Menubar);
     app.component('Card', Card);
     app.component('SkeletonLoading', Skeleton);
+    app.component('Slider', Slider);
+    app.component('AutoComplete', AutoComplete);
 
     app.use(PrimeVue, {
         unstyled: true,
