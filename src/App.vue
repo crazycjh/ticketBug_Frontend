@@ -4,12 +4,23 @@
 import searchArea from './components/Search/SearchFunction.vue'
 import MenuBar from './components/home/header/MenuBar.vue'
 
-import { computed } from 'vue';
-import { RouterView, routeLocationKey, useRoute } from "vue-router";
+import { computed, onMounted } from 'vue';
+import { RouterView, useRoute } from "vue-router";
 
 import * as htmlToImage from 'html-to-image';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 
+
+onMounted(()=> {
+  switch (route.path) {
+    case '/flighhome' :
+      return true;
+    case '/ticketlist':
+      return false;
+    default :
+      return false;
+  }
+})
 
 const test = () => {
   htmlToImage.toJpeg(document.getElementById('test'), { quality: 0.95 })
@@ -32,7 +43,7 @@ const ishomePage = computed(() => {
     case '/ticketlist':
       return false;
     default :
-      return true;
+      return false;
   }
 });
 

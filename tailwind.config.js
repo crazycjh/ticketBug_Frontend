@@ -35,7 +35,10 @@ module.exports = {
         spacing: {
           '100px': '100px',
           '33': '8.25rem'
-        }
+        },
+        screens: {
+          'llg': '1100px',
+        },
     },
 },
   plugins: [],

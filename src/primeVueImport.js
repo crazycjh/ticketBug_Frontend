@@ -8,7 +8,7 @@ import Card from 'primevue/card';
 import Skeleton from 'primevue/skeleton';
 import Slider from 'primevue/Slider'
 import AutoComplete from 'primevue/autocomplete';
-
+import Checkbox from 'primevue/checkbox';
 
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
@@ -25,6 +25,7 @@ const setPrimeVue = (app) => {
     app.component('SkeletonLoading', Skeleton);
     app.component('Slider', Slider);
     app.component('AutoComplete', AutoComplete);
+    app.component('Checkbox', Checkbox);
 
     app.use(PrimeVue, {
         unstyled: true,

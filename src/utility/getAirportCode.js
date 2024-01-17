@@ -33,11 +33,6 @@ const airportCode =
       country: 'Belgium',
       code: 'BRU-Brussels - National'
     },
-    {
-      city: 'Bucharest',
-      country: 'Romania',
-      code: 'OTP-Henri Coanda Intl.'
-    },
     { city: 'Cologne', country: 'Germany', code: 'CGN-Cologne - Bonn' },
     { city: 'Copenhagen', country: 'Denmark', code: 'CPH-Kastrup' },
     
@@ -88,37 +83,51 @@ const airportCode =
     //
     { city: 'Sydney', country: '', code: 'SYD - Kingsford Smith Intl.' },
   ]
- 
-const getAirportInfo = (code) => {
+
+// 給search bar用
+const getExpediaAirportInfo = (code) => {
     let cityCode = ''
     let cityCode1 = [];
     let cityCode2 = [];
     cityCode = airportCode.filter(item => {
         if(item.code.toLowerCase().includes(code.toLowerCase())) {
-            console.log(item.code);
-            return item.code;
+            return true;
         }
-        return [];
     } )
+    console.log(cityCode);
     cityCode1 = airportCode.filter(item => {
         if(item.country.toLowerCase().includes(code.toLowerCase())){
-            console.log(item.code);
-            return item.code;
+            return true;
         }
     } )
+    console.log(cityCode1);
     cityCode2 = airportCode.filter(item => {
         if(item.city.toLowerCase().includes(code.toLowerCase())){
-            console.log(item.code);
-            return item.code;
+            return true;
         }
-        return [];
     });
+    console.log(cityCode2);
     const cityInfo = [...new Set([...cityCode, ...cityCode1, ...cityCode2])];
-    console.log(cityInfo.map(item =>{ return {code: item.code} } ))
-    if ( cityInfo ) {
-      return cityInfo
+    const searchResult = cityInfo.map(item =>{ return {name: item.code, value: item.code.split('-')[0]} } )
+    if ( searchResult ) {
+        console.log(searchResult);
+      return searchResult
     }
     return [];
 }
 
-export { getAirportInfo }
+const getExpediaAirportInfoByCode = ( code ) => {
+  let cityCode = airportCode.filter(item => {
+    if(item.code.toLowerCase().includes(code.toLowerCase())) {
+        return true;
+    }
+  })
+  return cityCode[0];
+}
+
+const convertAirportCodeToCityCountry = (queryCode) => {
+    let result=''
+    result = airportCode.find((item)=> item.code.split('-')[0].toLowerCase() === queryCode.toLowerCase())
+}
+
+export { getExpediaAirportInfo, convertAirportCodeToCityCountry, getExpediaAirportInfoByCode }
