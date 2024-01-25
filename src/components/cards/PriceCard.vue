@@ -1,174 +1,179 @@
 <template>
-	<Card
-		v-for="item in priceList"
-		:key="item.id"
-		class="mb-4 md:min-w-[630px] max-w-[85%]"
-	>
-		<template #content>
-			<div class="flex gap-3 items-center w-full">
-				<div class="flex flex-col gap-10 w-10/12">
-					<div class="flex items-center gap-4">
-						<!-- 出發 -->
-						<!-- 目的地 -->
-						<div class="text-lg font-medium whitespace-nowrap">
-							{{ item.dateShort_1 }}
-						</div>
-						<div class="">{{ item.airport_1 }}</div>
-						<div
-							class="arrow-right relative flex items-center w-11/12 justify-center"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								xml:space="preserve"
-								viewBox="0 0 12 12"
-								class="absolute top-2/4 -right-5 w-4 h-4 -translate-y-2/4"
-							>
-								<path
-									fill="#898294"
-									d="M3.922 12h.499a.52.52 0 0 0 .444-.247L7.949 6.8l3.233-.019A.8.8 0 0 0 12 6a.8.8 0 0 0-.818-.781L7.949 5.2 4.866.246A.525.525 0 0 0 4.421 0h-.499a.523.523 0 0 0-.489.71L5.149 5.2H2.296l-.664-1.33a.523.523 0 0 0-.436-.288L0 3.509 1.097 6 0 8.491l1.196-.073a.523.523 0 0 0 .436-.288l.664-1.33h2.853l-1.716 4.49a.523.523 0 0 0 .489.71"
-								></path>
-							</svg>
-							<div class="flex justify-center text-xs mt-10">
-								{{ item.layover_info }}
+	<div v-for="date in priceList" :key="date">
+		<div v-for="airport in date" :key="airport">
+
+			<Card
+				v-for="item in airport"
+				:key="item.id"
+				class="mb-4 md:min-w-[630px] max-w-[85%]"
+			>
+				<template #content>
+					<div class="flex gap-3 items-center w-full">
+						<div class="flex flex-col gap-10 w-10/12">
+							<div class="flex items-center gap-4">
+								<!-- 出發 -->
+								<!-- 目的地 -->
+								<div class="text-lg font-medium whitespace-nowrap">
+									{{ item.date_1.slice(4, 6) + "/" + item.date_1.slice(6) }}
+								</div>
+								<div class="">{{ item.airport_1 }}</div>
+								<div
+									class="arrow-right relative flex items-center w-11/12 justify-center"
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										xml:space="preserve"
+										viewBox="0 0 12 12"
+										class="absolute top-2/4 -right-5 w-4 h-4 -translate-y-2/4"
+									>
+										<path
+											fill="#898294"
+											d="M3.922 12h.499a.52.52 0 0 0 .444-.247L7.949 6.8l3.233-.019A.8.8 0 0 0 12 6a.8.8 0 0 0-.818-.781L7.949 5.2 4.866.246A.525.525 0 0 0 4.421 0h-.499a.523.523 0 0 0-.489.71L5.149 5.2H2.296l-.664-1.33a.523.523 0 0 0-.436-.288L0 3.509 1.097 6 0 8.491l1.196-.073a.523.523 0 0 0 .436-.288l.664-1.33h2.853l-1.716 4.49a.523.523 0 0 0 .489.71"
+										></path>
+									</svg>
+									<div class="flex justify-center text-xs mt-10">
+										{{ item.layover_info }}
+									</div>
+								</div>
+								<div class="ml-6">{{ item.airport_2 }}</div>
+							</div>
+							<div class="flex items-center gap-4">
+								<!-- 目的 -->
+								<!-- 出發地 -->
+								<div class="text-lg whitespace-nowrap">
+									{{ item.date_2.slice(4, 6) + "/" + item.date_2.slice(6) }}
+								</div>
+								<div>{{ item.airport_2 }}</div>
+								<div
+									class="arrow-right relative flex items-center w-11/12 justify-center"
+								>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										xml:space="preserve"
+										viewBox="0 0 12 12"
+										class="absolute top-2/4 -right-5 w-4 h-4 -translate-y-2/4"
+									>
+										<path
+											fill="#898294"
+											d="M3.922 12h.499a.52.52 0 0 0 .444-.247L7.949 6.8l3.233-.019A.8.8 0 0 0 12 6a.8.8 0 0 0-.818-.781L7.949 5.2 4.866.246A.525.525 0 0 0 4.421 0h-.499a.523.523 0 0 0-.489.71L5.149 5.2H2.296l-.664-1.33a.523.523 0 0 0-.436-.288L0 3.509 1.097 6 0 8.491l1.196-.073a.523.523 0 0 0 .436-.288l.664-1.33h2.853l-1.716 4.49a.523.523 0 0 0 .489.71"
+										></path>
+									</svg>
+								</div>
+								<div class="ml-6">{{ item.airport_1 }}</div>
 							</div>
 						</div>
-						<div class="ml-6">{{ item.airport_2 }}</div>
-					</div>
-					<div class="flex items-center gap-4">
-						<!-- 目的 -->
-						<!-- 出發地 -->
-						<div class="text-lg whitespace-nowrap">
-							{{ item.dateShort_2 }}
-						</div>
-						<div>{{ item.airport_2 }}</div>
-						<div
-							class="arrow-right relative flex items-center w-11/12 justify-center"
-						>
-							<svg
-								xmlns="http://www.w3.org/2000/svg"
-								xml:space="preserve"
-								viewBox="0 0 12 12"
-								class="absolute top-2/4 -right-5 w-4 h-4 -translate-y-2/4"
+						<div class="self-center flex flex-col gap-2">
+							<!-- 三個按鈕 -->
+		
+							<!-- 三個按鈕 傳入圖片 -->
+		
+							<primeButton
+								class="h-8"
+								label=""
+								:pt="{ root: '!p-1' }"
+								@click="
+									expediaClick(
+										{
+											date: {
+												date1: item.date_1,
+												date2: item.date_2,
+											},
+											location: {
+												from: item.airport_1,
+												to: item.airport_2,
+											},
+										},
+										'RT'
+									)
+								"
 							>
-								<path
-									fill="#898294"
-									d="M3.922 12h.499a.52.52 0 0 0 .444-.247L7.949 6.8l3.233-.019A.8.8 0 0 0 12 6a.8.8 0 0 0-.818-.781L7.949 5.2 4.866.246A.525.525 0 0 0 4.421 0h-.499a.523.523 0 0 0-.489.71L5.149 5.2H2.296l-.664-1.33a.523.523 0 0 0-.436-.288L0 3.509 1.097 6 0 8.491l1.196-.073a.523.523 0 0 0 .436-.288l.664-1.33h2.853l-1.716 4.49a.523.523 0 0 0 .489.71"
-								></path>
-							</svg>
+								<img
+									src="@/assets/otaLogos/Expedia_Logo.svg"
+									alt=""
+									class=""
+								/>
+							</primeButton>
+							<primeButton
+								class="h-8"
+								label=""
+								:pt="{ root: '!p-1' }"
+								@click="
+									skyscannerClick({
+										date: {
+												date1: item.date_1,
+												date2: item.date_2,
+											},
+										location: {
+											from: item.airport_1,
+											to: item.airport_2,
+										},
+									}, 'RT')
+								"
+							>
+								<img
+									src="@/assets/otaLogos/Skyscanner_Logo.svg"
+									alt=""
+									class="h-6"
+								/>
+							</primeButton>
+							<primeButton class="h-8" label="" @click="tripComClick({
+										date: {
+												date1: item.date_1,
+												date2: item.date_2,
+											},
+										location: {
+											from: item.airport_1,
+											to: item.airport_2,
+										},
+									}, 'RT')">
+								<img
+									src="@/assets/otaLogos/Tripcom_Logo.svg"
+									alt=""
+									class="h-4"
+								/>
+							</primeButton>
 						</div>
-						<div class="ml-6">{{ item.airport_1 }}</div>
 					</div>
-				</div>
-				<div class="self-center flex flex-col gap-2">
-					<!-- 三個按鈕 -->
-
-					<!-- 三個按鈕 傳入圖片 -->
-
-					<primeButton
-						class="h-8"
-						label=""
-						:pt="{ root: '!p-1' }"
-						@click="
-							expediaClick(
-								{
-									date: {
-										date1: item.date_1,
-										date2: item.date_2,
-									},
-									location: {
-										from: item.airport_1,
-										to: item.airport_2,
-									},
-								},
-								'RT'
-							)
-						"
+					<div
+						class="flex justify-end mt-6 -mb-5 font-bold whitespace-nowrap tracking-wide text-xl cursor-pointer"
+						@click="openThree({
+										date: {
+												date1: item.date_1,
+												date2: item.date_2,
+											},
+										location: {
+											from: item.airport_1,
+											to: item.airport_2,
+										},
+									}, 'RT')"
 					>
-						<img
-							src="@/assets/otaLogos/Expedia_Logo.svg"
-							alt=""
-							class=""
-						/>
-					</primeButton>
-					<primeButton
-						class="h-8"
-						label=""
-						:pt="{ root: '!p-1' }"
-						@click="
-							skyscannerClick({
-                                date: {
-										date1: item.date_1,
-										date2: item.date_2,
-									},
-								location: {
-									from: item.airport_1,
-									to: item.airport_2,
-								},
-							}, 'RT')
-						"
-					>
-						<img
-							src="@/assets/otaLogos/Skyscanner_Logo.svg"
-							alt=""
-							class="h-6"
-						/>
-					</primeButton>
-					<primeButton class="h-8" label="" @click="tripComClick({
-                                date: {
-										date1: item.date_1,
-										date2: item.date_2,
-									},
-								location: {
-									from: item.airport_1,
-									to: item.airport_2,
-								},
-							}, 'RT')">
-						<img
-							src="@/assets/otaLogos/Tripcom_Logo.svg"
-							alt=""
-							class="h-4"
-						/>
-					</primeButton>
-				</div>
-			</div>
-			<div
-				class="flex justify-end mt-6 -mb-5 font-bold whitespace-nowrap tracking-wide text-xl cursor-pointer"
-                @click="openThree({
-                                date: {
-										date1: item.date_1,
-										date2: item.date_2,
-									},
-								location: {
-									from: item.airport_1,
-									to: item.airport_2,
-								},
-							}, 'RT')"
-			>
-				$NTD {{ item.price }}
-			</div>
-		</template>
-	</Card>
+						$NTD {{ formatNumberWithCommas(Number(item.price)) }}
+					</div>
+				</template>
+			</Card>
+		</div>
+	</div>
 </template>
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 import {
 	convertAirportCodeToCityCountry,
 	getExpediaAirportInfoByCode,
 } from "../../utility/getAirportCode";
 // import expedia from '@/assets/otaLogos/Expedia_Logo.svg'
-const props = defineProps(["data"]);
+const props = defineProps(["data", "originalData"]);
 
 const date_array = ref([]);
 // 拆解日期
 // 取得城市國家
 // convertAirportCodeToCityCountry()
-const priceList = ref(props.data);
-console.log(priceList.value.data);
-priceList.value.forEach((item) => {
-	item.dateShort_1 = item.date_1.slice(4, 6) + "/" + item.date_1.slice(6);
-	item.dateShort_2 = item.date_2.slice(4, 6) + "/" + item.date_2.slice(6);
-	item.price = formatNumberWithCommas(Number(item.price));
-});
+const priceList = ref();
+priceList.value = JSON.parse(JSON.stringify(props.data))
+// priceList.value.forEach((item) => {
+// 	item.dateShort_1 = item.date_1.slice(4, 6) + "/" + item.date_1.slice(6);
+// 	item.dateShort_2 = item.date_2.slice(4, 6) + "/" + item.date_2.slice(6);
+// 	item.price = formatNumberWithCommas(Number(item.price));
+// });
 
 //
 const expediaClick = (info, type) => {
@@ -220,6 +225,18 @@ function splitDate( date ) {
 function formatNumberWithCommas(number) {
 	return new Intl.NumberFormat().format(number);
 }
+
+watch(()=> props.data, (newValue, oldValue) => {
+	// console.log(newValue);
+	console.log('priceCard');
+	priceList.value = props.data;
+	priceList.value.forEach((item) => {
+	item.dateShort_1 = item.date_1.slice(4, 6) + "/" + item.date_1.slice(6);
+	item.dateShort_2 = item.date_2.slice(4, 6) + "/" + item.date_2.slice(6);
+	item.price = formatNumberWithCommas(Number(item.price));
+});
+})
+
 </script>
 <style>
 .arrow-right,
