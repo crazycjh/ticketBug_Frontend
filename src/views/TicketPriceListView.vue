@@ -34,7 +34,6 @@ let originalData = ref(null);
 const queryData = ref(null);
 const airportSet = ref(null);
 const dateSet = ref(null);
-const testest = ref("111");
 
 // 篩選條件
 const filterCondiction = { date: null, airport: null };

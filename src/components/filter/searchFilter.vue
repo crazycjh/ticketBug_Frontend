@@ -24,7 +24,7 @@
 						name="date"
 						:value="item"
 					/>
-					<label :for="`airport${index}`" class="ml-2"> {{ item }} </label>
+					<label :for="`date_${index}`" class="ml-2"> {{ item }} </label>
 				</div>
 			</div>
 		</div>
