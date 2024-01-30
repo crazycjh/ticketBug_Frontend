@@ -155,24 +155,24 @@ function sortData(data) {
 const doFilter = (filterInfo) => {
 	isloading.value = true;
 
-  const filteredDateData = {};
-  filterInfo.date.forEach((dateTime) => {
-    filterInfo.airport.forEach((airport) => {
-      if(originalData.value[dateTime] && originalData.value[dateTime][airport]) {
-        if(!filteredDateData[dateTime]) {
-          filteredDateData[dateTime] = {};
-          if(!filteredDateData[dateTime][airport]) {
-            filteredDateData[dateTime][airport] = [];
-          }
-        }
-        filteredDateData[dateTime][airport] = originalData.value[dateTime][airport]
+const filteredDateData = {};
+filterInfo.date.forEach((dateTime) => {
+filterInfo.airport.forEach((airport) => {
+	if(originalData.value[dateTime] && originalData.value[dateTime][airport]) {
+	if(!filteredDateData[dateTime]) {
+		filteredDateData[dateTime] = {};
+		if(!filteredDateData[dateTime][airport]) {
+		filteredDateData[dateTime][airport] = [];
+		}
+	}
+	filteredDateData[dateTime][airport] = originalData.value[dateTime][airport]
 
-      }
-    })
-  })
-  console.log(filteredDateData);
-  queryData.value = filteredDateData;
-  setTimeout(() => {
+	}
+})
+})
+console.log(filteredDateData);
+queryData.value = filteredDateData;
+setTimeout(() => {
 		// queryData.value = JSON.parse(
 		// 	JSON.stringify(
 		// 		originalData.value.filter((priceInfo) => {
@@ -224,19 +224,17 @@ const doFilter = (filterInfo) => {
 					:step="0.5"
 					class="w-14rem"
 				/>
-				
 					<!-- 改寫到一隻檔案中，並且傳入資料，讓其可以把目的地列出 -->
 						<!-- <h4 class="mb-2 pl-1">{{ item.location }}</h4> -->
-      <!--  -->
+ <!--  -->
         <searchFilter v-if="airportSet && dateSet"
-          @filter-condiction="doFilter"  
-          :airport-set="airportSet"
-          :date-set="dateSet"
+		@filter-condiction="doFilter"
+		:airport-set="airportSet"
+		:date-set="dateSet"
         />
         <!-- 傳入dateSet, airportSet -->
-      
+
 					<!--  -->
-				
 			</div>
 		</aside>
 		<main id="areaLoading" class="grow">

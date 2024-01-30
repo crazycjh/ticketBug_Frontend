@@ -9,9 +9,10 @@ import { RouterView, useRoute } from "vue-router";
 
 import * as htmlToImage from 'html-to-image';
 import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+import axios from 'axios';
 
 
-onMounted(()=> {
+onMounted(async ()=> {
   switch (route.path) {
     case '/flighhome' :
       return true;
@@ -47,6 +48,16 @@ const ishomePage = computed(() => {
   }
 });
 
+const isMemberCenter = computed(() => {
+  console.log('isMemberCentrt')
+  switch (route.path) {
+    case '/membercenter' :
+      return false;
+    default :
+      return true;
+  }
+});
+
 </script>
 
 <template>
@@ -56,10 +67,10 @@ const ishomePage = computed(() => {
       <nav>
         <MenuBar/>
       </nav>
-      <div class="">
+      <div v-show="isMemberCenter">
         <h2 v-show="ishomePage" class="mt-16  text-5xl text-center text-slate-800 font-bold">一鍵搜尋，爬出所有便宜機票。</h2>
       </div>
-      <searchArea/>
+      <searchArea v-show="isMemberCenter"/>
     </header>
   </div>
   <!-- <button type="button" @click="test" class=" cursor-pointer">生成拉</button> -->

@@ -54,12 +54,11 @@ const search = async() => {
 
 	console.log(currentParams);
 	if(roundOpen.value === 'round') {
-		// console.log('1111111111')
 		params = 'type=0'
 		// 來回
 		if(airport_1.value || airport_2.value) {
-			params += airport_1.value ? `&airport1=${airport_1.value.value}`: '';
-			params += airport_2.value ? `&airport2=${airport_2.value.value}`: '';
+			params += airport_1.value ? `&airport1=${airport_1.value.value.trim()}`: '';
+			params += airport_2.value ? `&airport2=${airport_2.value.value.trim()}`: '';
 			await router.push(`/ticketlist/?${params}`);
 			if (currentParams === params){
 				changeQueryState(true);

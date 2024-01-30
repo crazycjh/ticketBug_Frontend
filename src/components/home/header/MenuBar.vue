@@ -99,16 +99,15 @@ const items = ref([
     },
   },
   {
-    label: "External",
+    label: "登入",
     icon: "pi pi-home",
     items: [
       {
-        label: "Vue.js",
-        url: "https://vuejs.org/",
-      },
-      {
-        label: "Vite.js",
-        url: "https://vuejs.org/",
+        label: "Google登入",
+        icon: "pi pi-home",
+        command:() => {
+          window.location.href = 'http://localhost:3000/api/v1/users/auth/google'
+        },
       },
     ],
   },
