@@ -13,15 +13,14 @@ import axios from 'axios';
 
 
 onMounted(async ()=> {
-  switch (route.path) {
-    case '/flighhome' :
-      return true;
-    case '/ticketlist':
-      return false;
-    default :
-      return false;
-  }
+// 確認是否登入，若是登入則建立連線
+
 })
+
+function connectWebsocket() {
+  
+}
+
 
 const test = () => {
   htmlToImage.toJpeg(document.getElementById('test'), { quality: 0.95 })

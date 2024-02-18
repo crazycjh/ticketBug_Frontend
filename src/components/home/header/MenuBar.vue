@@ -70,13 +70,23 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed, watch } from "vue";
 import { useRouter } from "vue-router";
-
+import { useAuthStore } from '../../../stores/auth';
+const useAuth = useAuthStore();
 const router = useRouter();
 
+const isLogin = ref(useAuth.isLogin);
+
 const hasSubmenu = ref(true);
-const items = ref([
+
+watch(()=> useAuth.isLogin,(newValue) => {
+  console.log('useAuth.isLogin')
+  console.log(newValue)
+})
+
+console.log(useAuth.isLogin);
+const items = computed(() => [
   {
     label: "Router",
     icon: "pi pi-palette",
@@ -90,6 +100,7 @@ const items = ref([
         route: "/setting",
       },
     ],
+    visible: false,
   },
   {
     label: "便宜機票",
@@ -100,16 +111,34 @@ const items = ref([
   },
   {
     label: "登入",
-    icon: "pi pi-home",
+    icon: "pi pi-arrow-circle-up",
     items: [
       {
         label: "Google登入",
-        icon: "pi pi-home",
-        command:() => {
+        icon: "pi pi-google",
+        command: () => {
           window.location.href = 'http://localhost:3000/api/v1/users/auth/google'
         },
       },
     ],
+    visible: !useAuth.isLogin,
+  },
+  {
+    icon: "pi pi-user",
+    command: () => {
+      router.push("/membercenter");
+    },
+    visible: useAuth.isLogin,
+  },
+  {
+    label: "登出",
+    icon: "pi pi-link",
+    command: () => {
+      const useAuth = useAuthStore();
+      useAuth.setLoginStatus(false);
+      router.push("/");
+    },
+    visible: useAuth.isLogin,
   },
 ]);
 

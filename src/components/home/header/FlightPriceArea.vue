@@ -22,8 +22,7 @@
 </div>
 </template>
 <script setup>
-    import { ref, onMounted, defineProps } from "vue";
-    import { useRouter } from "vue-router";
+    import { ref, onMounted } from "vue";
     import axios from "axios"
 
     const props = defineProps(['from']);

@@ -9,7 +9,9 @@ import Skeleton from 'primevue/skeleton';
 import Slider from 'primevue/Slider'
 import AutoComplete from 'primevue/autocomplete';
 import Checkbox from 'primevue/checkbox';
-
+import InputSwitch from 'primevue/inputswitch';
+import DataTable from 'primevue/DataTable';
+import Column from 'primevue/column';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
 import BadgeDirective from 'primevue/badgedirective';
@@ -26,7 +28,9 @@ const setPrimeVue = (app) => {
     app.component('Slider', Slider);
     app.component('AutoComplete', AutoComplete);
     app.component('Checkbox', Checkbox);
-
+    app.component('InputSwitch', InputSwitch);
+    app.component('DataTable', DataTable);
+    app.component('Column', Column);
     app.use(PrimeVue, {
         unstyled: true,
         pt: Lara,

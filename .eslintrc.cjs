@@ -42,4 +42,10 @@ module.exports = {
       '@vitejs/plugin-vue',
     ],
   },
+  
+    "env": {
+      "browser": true,
+      "worker": true
+    }
+  
 }

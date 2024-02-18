@@ -1,5 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import { useAuthStore } from '../stores/auth';
+
+import cookies from 'js-cookie';
+// import HomeView from '../views/HomeView.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -34,10 +37,29 @@ const router = createRouter({
     {
       path: '/membercenter',
       name: 'membercenter',
-      component: () => import('../views/MemberCenterView.vue')
+      component: () => import('../views/MemberCenterView.vue'),
+      meta: { requiresAuth: true }
     }
 
   ]
 })
+
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore();
+  console.log(cookies.get('isLogin'))
+  if(cookies.get('isLogin')) {
+    console.log(cookies.get('isLogin'))
+    authStore.setLoginStatus(true);
+    console.log(authStore.isLogin);
+    cookies.remove('isLogin');
+  }
+
+  if(to.meta.requiresAuth && !authStore.isLogin){
+    next({name: 'HomeView'})
+  }else {
+    next();
+  }
+})
+
 
 export default router
