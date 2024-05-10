@@ -1,7 +1,7 @@
 <script setup>
 // import { ref, watch } from 'vue';
 
-import flightPriceArea from '../components/home/header/flightPriceArea.vue';
+import flightPriceArea from '../components/home/header/FlightPriceArea.vue';
 </script>
 
 <template>
