@@ -9,7 +9,7 @@ import axios from "axios";
 
 import SkeletonComponent from "../utility/skeleton.vue";
 
-import searchFilter from "../components/filter/searchfilter.vue";
+import searchFilter from "../components/filter/searchFilter.vue";
 import PriceCard from "../components/cards/PriceCard.vue";
 
 const route = useRoute();
