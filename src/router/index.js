@@ -29,11 +29,11 @@ const router = createRouter({
       name: 'Setting',
       component: () => import('../views/HomeView.vue')
     },
-    {
-      path: '/login',
-      name: 'login',
-      component: () => import('../views/loginPage.vue')
-    },
+    // {
+    //   path: '/login',
+    //   name: 'login',
+    //   component: () => import('../views/loginPage.vue')
+    // },
     {
       path: '/membercenter',
       name: 'membercenter',
