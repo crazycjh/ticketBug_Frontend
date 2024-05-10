@@ -2,15 +2,15 @@ import PrimeVue from "primevue/config";
 import Lara from "@/presets/lara";
 
 import Button from "primevue/button";
-import InputText from "primevue/InputText";
+import InputText from 'primevue/inputtext';
 import Menubar from 'primevue/menubar';
 import Card from 'primevue/card';
 import Skeleton from 'primevue/skeleton';
-import Slider from 'primevue/Slider'
+import Slider from 'primevue/slider';
 import AutoComplete from 'primevue/autocomplete';
 import Checkbox from 'primevue/checkbox';
 import InputSwitch from 'primevue/inputswitch';
-import DataTable from 'primevue/DataTable';
+import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
