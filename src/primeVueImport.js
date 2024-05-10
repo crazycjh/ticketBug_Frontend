@@ -14,10 +14,16 @@ import DataTable from 'primevue/DataTable';
 import Column from 'primevue/column';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
+import Badge from 'primevue/badge';
 import BadgeDirective from 'primevue/badgedirective';
+import PrimeDialog from 'primevue/dialog';
+import Calendar from 'primevue/calendar';
+import OverlayPanel from 'primevue/overlaypanel';
+
 
 const setPrimeVue = (app) => {
     app.directive('badge', BadgeDirective);
+    app.component('Badge', Badge);
     app.component('primeButton', Button);
     app.component('InputText', InputText);
     app.component('InputGroup', InputGroup);
@@ -31,6 +37,11 @@ const setPrimeVue = (app) => {
     app.component('InputSwitch', InputSwitch);
     app.component('DataTable', DataTable);
     app.component('Column', Column);
+    app.component('PrimeDialog', PrimeDialog);
+    app.component('Calendar', Calendar);
+    app.component('OverlayPanel', OverlayPanel);
+    
+
     app.use(PrimeVue, {
         unstyled: true,
         pt: Lara,

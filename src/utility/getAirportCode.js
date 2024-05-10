@@ -94,23 +94,23 @@ const getExpediaAirportInfo = (code) => {
             return true;
         }
     } )
-    console.log(cityCode);
+    // console.log(cityCode);
     cityCode1 = airportCode.filter(item => {
         if(item.country.toLowerCase().includes(code.toLowerCase())){
             return true;
         }
     } )
-    console.log(cityCode1);
+    // console.log(cityCode1);
     cityCode2 = airportCode.filter(item => {
         if(item.city.toLowerCase().includes(code.toLowerCase())){
             return true;
         }
     });
-    console.log(cityCode2);
+    // console.log(cityCode2);
     const cityInfo = [...new Set([...cityCode, ...cityCode1, ...cityCode2])];
     const searchResult = cityInfo.map(item =>{ return {name: item.code, value: item.code.split('-')[0]} } )
     if ( searchResult ) {
-        console.log(searchResult);
+        // console.log(searchResult);
       return searchResult
     }
     return [];

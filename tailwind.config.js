@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './index.html',
     "./node_modules/primevue/**/*.{vue,js,ts,jsx,tsx}",
@@ -38,6 +39,7 @@ module.exports = {
         },
         screens: {
           'llg': '1100px',
+          // 'lgmd': 
         },
     },
 },

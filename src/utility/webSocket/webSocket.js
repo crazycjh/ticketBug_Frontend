@@ -1,8 +1,14 @@
 import { ref } from 'vue';
 import cookies from 'js-cookie';
-
+import {useNotifyStore} from '../../stores/notification'
 const wsStatus = ref('Disconnected');
 let port;
+let notifyStore;
+
+function callNotifyStore() {
+    notifyStore = useNotifyStore();
+}
+
 
 function connectWebSocket() {
     if ('SharedWorker' in window) {
@@ -12,12 +18,15 @@ function connectWebSocket() {
 
         port = worker.port;
         worker.port.onmessage = (event) => {
-        const { type, message } = event.data;
-        if (type === 'STATUS') {
-            wsStatus.value = message;
-        } else if (type === 'MESSAGE') {
-            console.log('Message from WebSocket:', message);
-        }
+
+            if (event.data.message.type === 'NEW') {
+                notifyStore.increaseNotifyCount(event.data.message.message);
+                console.log('新的推播 ', event.data.message); 
+            } else if (event.data.message.type === 'MESSAGE') {
+                console.log('Message from WebSocket:', event.data.message);
+            }else {
+                console.log('else');
+            }
         };
 
 
@@ -29,4 +38,4 @@ function connectWebSocket() {
 }
 
 
-export { connectWebSocket }
+export { connectWebSocket, callNotifyStore }

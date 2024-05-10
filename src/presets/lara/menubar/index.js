@@ -29,8 +29,8 @@ export default {
 
             // Position
             'absolute sm:relative',
-            'top-full left-0',
-            'sm:top-auto sm:left-auto',
+            'top-full left-0 sm:left-auto',
+            ' sm:top-auto sm:left-auto',
 
             // Size
             'w-full sm:w-auto',

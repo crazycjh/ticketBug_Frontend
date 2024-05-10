@@ -17,7 +17,6 @@ const route = useRoute();
 // setting
 const isloading = ref(true);
 
-
 // skeleton 設定
 const skeletonHeight = 400;
 const containerHeight = ref(500);
@@ -102,7 +101,7 @@ async function doQuery() {
 	// 清空資料
 	queryData.value = null;
 	airportSet.value = null;
-  dateSet.value = null;
+	dateSet.value = null;
 	const queryString = Object.keys(route.query)
 		.map(
 			(key) =>
@@ -114,76 +113,81 @@ async function doQuery() {
 	console.log(
 		`${import.meta.env.VITE_BACKEND_URL}/api/v1/ticketList/?${queryString}`
 	);
-  try {
-    const resp = await axios.get(
-      `${import.meta.env.VITE_BACKEND_URL}/api/v1/ticketList/?${queryString}`
-    );
-    queryData.value = JSON.parse(JSON.stringify(resp.data.data.data));
-    originalData.value = JSON.parse(JSON.stringify(resp.data.data.data));
-    airportSet.value = resp.data.data.airportSet;
-    dateSet.value = resp.data.data.dateSet;
+	try {
+		const resp = await axios.get(
+			`${
+				import.meta.env.VITE_BACKEND_URL
+			}/api/v1/ticketList/?${queryString}`
+		);
+		queryData.value = JSON.parse(JSON.stringify(resp.data.data.data));
+		originalData.value = JSON.parse(JSON.stringify(resp.data.data.data));
+		airportSet.value = resp.data.data.airportSet;
+		dateSet.value = resp.data.data.dateSet;
 
-    isloading.value = false;
-  }catch(error) {
-    console.error(error, ' 資料庫連線錯誤');
-  }
+		isloading.value = false;
+	} catch (error) {
+		console.error(error, " 資料庫連線錯誤");
+	}
 }
 
 function sortData(data) {
-  // RT 以query的type來判斷
-  const indexedData = data.reduce((acc, item) => {
-    let firstLevelIndex;
+	// RT 以query的type來判斷
+	const indexedData = data.reduce((acc, item) => {
+		let firstLevelIndex;
 
-    if(route.query.type === '0'){
-      firstLevelIndex = item.airport_2;
-    }else if(route.query.type === '1'){
-      firstLevelIndex = item.airport_2 + '-' + item.airport_2;
-    }
+		if (route.query.type === "0") {
+			firstLevelIndex = item.airport_2;
+		} else if (route.query.type === "1") {
+			firstLevelIndex = item.airport_2 + "-" + item.airport_2;
+		}
 
-    if( !acc[firstLevelIndex]) {
-      acc[firstLevelIndex] = {};
-    }
+		if (!acc[firstLevelIndex]) {
+			acc[firstLevelIndex] = {};
+		}
 
-    const dateIndex = item.date_1 + '-' + item.date_2;
-    acc[firstLevelIndex][dateIndex] = item;
-    return acc;
-    }, {})
-    return indexedData;
+		const dateIndex = item.date_1 + "-" + item.date_2;
+		acc[firstLevelIndex][dateIndex] = item;
+		return acc;
+	}, {});
+	return indexedData;
 }
 
 const doFilter = (filterInfo) => {
 	isloading.value = true;
 
-const filteredDateData = {};
-filterInfo.date.forEach((dateTime) => {
-filterInfo.airport.forEach((airport) => {
-	if(originalData.value[dateTime] && originalData.value[dateTime][airport]) {
-	if(!filteredDateData[dateTime]) {
-		filteredDateData[dateTime] = {};
-		if(!filteredDateData[dateTime][airport]) {
-		filteredDateData[dateTime][airport] = [];
-		}
-	}
-	filteredDateData[dateTime][airport] = originalData.value[dateTime][airport]
-
-	}
-})
-})
-console.log(filteredDateData);
-queryData.value = filteredDateData;
-setTimeout(() => {
+	const filteredDateData = {};
+	filterInfo.date.forEach((dateTime) => {
+		filterInfo.airport.forEach((airport) => {
+			if (
+				originalData.value[dateTime] &&
+				originalData.value[dateTime][airport]
+			) {
+				if (!filteredDateData[dateTime]) {
+					filteredDateData[dateTime] = {};
+					if (!filteredDateData[dateTime][airport]) {
+						filteredDateData[dateTime][airport] = [];
+					}
+				}
+				filteredDateData[dateTime][airport] =
+					originalData.value[dateTime][airport];
+			}
+		});
+	});
+	console.log(filteredDateData);
+	queryData.value = filteredDateData;
+	setTimeout(() => {
 		// queryData.value = JSON.parse(
 		// 	JSON.stringify(
 		// 		originalData.value.filter((priceInfo) => {
 		// 			filterInfo.forEach(( item ) => {
-    //         // 跑日期跟地點
-    //         for(const key in item) {
-    //           item[key].forEach((filterItem) => {
+		//         // 跑日期跟地點
+		//         for(const key in item) {
+		//           item[key].forEach((filterItem) => {
 
-    //           })
-    //         }
-    //       })
-    //       // if (
+		//           })
+		//         }
+		//       })
+		//       // if (
 		// 			// 	filterInfo.location[0].destination.includes(
 		// 			// 		priceInfo[`airport_${filterInfo.location[0].index}`]
 		// 			// 	)
@@ -197,63 +201,89 @@ setTimeout(() => {
 		isloading.value = false;
 	});
 };
+
+// create a list of items about 10000 items
+const list = [];
+for (let i = 0; i < 1000; i++) {
+	list.push({
+		id: i,
+		name: `Item ${i}`,
+	});
+}
 </script>
 
 <template>
 	<!-- 在手機模式移除aside，在平板模式縮窄寬度同時並且把字體變小包含icon -->
 	<div class="md:flex w-full">
-		<aside class="hidden w-[300px] min-w-[250px] lg:block">
+		<aside class="hidden min-w-[250px] ml-4 lg:block fixed h-[calc(100%-312px)] overflow-y-auto sidebar" >
 			<div class="flex flex-col items-center gap-20 mt-16">
 				<!-- 依照目的地數量產生出發時間 -->
 				<!-- 第一段 -->
-				<Slider
+				<!-- <Slider
 					v-model="DateValue"
 					range
 					:min="0"
 					:max="24"
 					:step="0.5"
 					class="w-14rem"
-				/>
+				/> -->
 				<!-- 第二段 -->
-				<Slider
+				<!-- <Slider
 					v-model="DateValue"
 					range
 					:min="0"
 					:max="24"
 					:step="0.5"
 					class="w-14rem"
+				/> -->
+				<!-- 改寫到一隻檔案中，並且傳入資料，讓其可以把目的地列出 -->
+				<!-- <h4 class="mb-2 pl-1">{{ item.location }}</h4> -->
+				<!--  -->
+				<searchFilter
+					v-if="airportSet && dateSet"
+					@filter-condiction="doFilter"
+					:airport-set="airportSet"
+					:date-set="dateSet"
 				/>
-					<!-- 改寫到一隻檔案中，並且傳入資料，讓其可以把目的地列出 -->
-						<!-- <h4 class="mb-2 pl-1">{{ item.location }}</h4> -->
- <!--  -->
-        <searchFilter v-if="airportSet && dateSet"
-		@filter-condiction="doFilter"
-		:airport-set="airportSet"
-		:date-set="dateSet"
-        />
-        <!-- 傳入dateSet, airportSet -->
+				<!-- 傳入dateSet, airportSet -->
 
-					<!--  -->
+				<!--  -->
 			</div>
 		</aside>
-		<main id="areaLoading" class="grow">
+		<main id="areaLoading" class="grow lg:ml-80 priceList min-w-[600px]">
 			<div
-				class="llg:flex llg:flex-col llg:items-center llg:gap-3 mt-3 mx-6 w-full"
+				class="llg:flex llg:flex-col llg:items-center llg:gap-3 mt-3 mx-6 w-full h-full"
 			>
-				<div v-if="isloading" class="w-full md:w-3/4">
+				<div v-if="isloading" class="w-full">
 					<Card v-for="n in skeletonCount" :key="n" class="mb-4">
 						<template #content>
 							<SkeletonComponent />
 						</template>
 					</Card>
 				</div>
-				<div v-else class="md:w-3/4">
+				<div v-else class=" h-full w-full">
 					<!-- 傳入data -->
-					<PriceCard :data="queryData" :originalData="queryData"/>
+					<PriceCard :data="queryData" :originalData="queryData" />
 				</div>
 			</div>
 		</main>
 		<!-- 是否要做分頁(這樣比較加分) -->
 	</div>
 </template>
-<style></style>
+<style>
+.scroller {
+	height: 100%;
+}
+
+.priceList {
+	height: calc(100vh - 320px) !important;
+	scrollbar-width: none !important;
+}
+
+.user {
+	height: 32%;
+	padding: 0 12px;
+	display: flex;
+	align-items: center;
+}
+</style>
