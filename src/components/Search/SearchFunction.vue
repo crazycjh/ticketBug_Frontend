@@ -162,7 +162,6 @@ function notificationData() {
 	}
 
 
-	console.log(date_2.value.getDate())
 	params.month_1 = `${date_1.value.getFullYear()}${(date_1.value.getMonth() + 1 ).toString().padStart(2, '0')}`
 	params.month_2 = `${date_2.value.getFullYear()}${(date_2.value.getMonth() + 1 ).toString().padStart(2, '0')}`
 
@@ -172,8 +171,8 @@ function notificationData() {
             if(item.airport_2 === params.airport_2){
                 if(item.airport_3 === params.airport_3){
                     if(item.airport_4 === params.airport_4){
-                        if(item.date_1 === params.date_1){
-                            if(item.date_2 === params.date_2){
+                        if(item.date_1 === params.month_1){
+                            if(item.date_2 === params.month_2){
                                 console.log('重複了拉');
 								return {};
                             }
