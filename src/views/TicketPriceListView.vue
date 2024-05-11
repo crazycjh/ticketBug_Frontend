@@ -250,11 +250,11 @@ for (let i = 0; i < 1000; i++) {
 				<!--  -->
 			</div>
 		</aside>
-		<main id="areaLoading" class="grow lg:ml-80 priceList min-w-[600px]">
+		<main id="areaLoading" class="grow lg:ml-60 priceList min-w-[600px]">
 			<div
-				class="llg:flex llg:flex-col llg:items-center llg:gap-3 mt-3 mx-6 w-full h-full"
+				class="llg:flex llg:flex-col llg:items-center llg:gap-3 mt-3  w-full h-full"
 			>
-				<div v-if="isloading" class="w-full">
+				<div v-if="isloading" class="w-[500px] lg:w-[800px]">
 					<Card v-for="n in skeletonCount" :key="n" class="mb-4">
 						<template #content>
 							<SkeletonComponent />
